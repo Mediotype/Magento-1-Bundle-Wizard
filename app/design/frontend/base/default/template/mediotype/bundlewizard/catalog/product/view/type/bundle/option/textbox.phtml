@@ -1,0 +1,84 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+?>
+
+<?php /** @var $this Mediotype_BundleWizard_Block_Bundle_Catalog_Product_View_Type_Bundle_Option_Textbox */ ?>
+<?php /** @var $_option Mediotype_BundleWizard_Model_Bundle_Option */ ?>
+<?php $_option = $this->getOption() ?>
+<?php $_selections = $_option->getSelections() ?>
+<?php if ($_option->hasConfig()): ?>
+<dt id="bundle_option_container[<?php echo $_option->getId() ?>][config]_title" class="option-title">
+    <label <?php if ($_option->getRequired()) echo 'class="required"' ?>>
+        <?php echo ($config_title = $_option->getData('config_title')) ? $config_description : $_option->getData('default_config_title'); ?>
+    <?php if ($_option->getRequired()) echo '<em>*</em>' ?>
+    </label>
+</dt>
+<dd id="bundle_option_container[<?php echo $_option->getId() ?>][config]"
+    class="option-content no-display" <?= ($_option->decoratedIsLast) ? "last" : null; ?>">
+    <div class="description">
+    <?php echo ($config_description = $_option->getData('config_description')) ? $config_description : $_option->getData('default_config_description'); ?>
+    </div>
+    <div>
+        <?php echo $_option->getConfigurableOptionHtml(); ?>
+    </div>
+    <span class="qty-holder">
+        <?php if ($_option->getId() > 1): ?>
+        <a href="#" class="button back" href="#"
+           onclick="bWizard.previousStep(this);return false;">
+            <span><span>Back</span></span></a>
+    <?php endif; ?>
+            <a class="button" href="#" onclick="bWizard.nextStep(this);return false;">
+                <span><span>Next</span></span></a>
+    </span>
+</dd>
+<?php endif; ?>
+<dt id="bundle_option_container[<?php echo $_option->getId() ?>]_title" class="option-title">
+    <label<?php if ($_option->getRequired()) echo ' class="required"' ?>><?php echo $this->escapeHtml($_option->getTitle()) ?><?php if ($_option->getRequired()) echo '<em>*</em>' ?></label>
+</dt>
+<dd id="bundle_option_container[<?php echo $_option->getId() ?>]"
+    class="option-content no-display" <?= ($_option->decoratedIsLast) ? "last" : null; ?>">
+<div class="description">
+    <?php echo ($description = $_option->getData('description')) ? $description : $_option->getData('default_description'); ?>
+</div>
+<div class="input-box">
+    <input class="bundle-option-<?php echo $_option->getId() ?> "
+           id="bundle-option-<?php echo $_option->getId() ?>"
+           type="textbox"
+           name="bundle_option[<?php echo $_option->getId() ?>][]"
+           value=""/>
+</div>
+<span class="qty-holder">
+    <?php if ($_option->getId() > 1 or $_option->hasConfig()): ?>
+        <a class="button back" href="#" onclick="bWizard.previousStep(this);return false;">
+            <span><span>Back</span></span></a>
+    <?php endif; ?>
+    <?php if (!$_option->decoratedIsLast): ?>
+        <a class="button" href="#" onclick="bWizard.nextStep(this);return false;">
+            <span><span>Next</span></span></a>
+    <?php endif; ?>
+    </span>
+</dd>

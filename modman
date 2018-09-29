@@ -1,0 +1,7 @@
+app/code/community/Mediotype/BundleWizard app/code/community/Mediotype/BundleWizard
+app/design/adminhtml/base/default/layout/mediotype/bundlewizard app/design/adminhtml/base/default/layout/mediotype/bundlewizard
+app/design/adminhtml/base/default/template/mediotype/bundlewizard app/design/adminhtml/base/default/template/mediotype/bundlewizard
+app/design/frontend/base/default/layout/mediotype/bundlewizard app/design/frontend/base/default/layout/mediotype/bundlewizard
+app/design/frontend/base/default/template/mediotype/bundlewizard app/design/frontend/base/default/template/mediotype/bundlewizard
+app/etc/modules/Mediotype_BundleWizard.xml app/etc/modules/Mediotype_BundleWizard.xml
+skin/frontend/base/default/mediotype/bundlewizard skin/frontend/base/default/mediotype/bundlewizard

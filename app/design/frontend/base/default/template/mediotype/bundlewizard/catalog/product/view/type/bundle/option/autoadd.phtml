@@ -1,0 +1,8 @@
+<?php /** @var $this Mediotype_BundleWizard_Block_Bundle_Catalog_Product_View_Type_Bundle_Option_Textbox */ ?>
+<?php /** @var $_option Mediotype_BundleWizard_Model_Bundle_Option */ ?>
+<?php $_option = $this->getOption() ?>
+<input class="bundle-option-<?php echo $_option->getId() ?> "
+       id="bundle-option-<?php echo $_option->getId() ?>"
+       type="hidden"
+       name="bundle_option[<?php echo $_option->getId() ?>][]"
+       value="<?= $_option->getData("autoadd_target_option") ?>"/>

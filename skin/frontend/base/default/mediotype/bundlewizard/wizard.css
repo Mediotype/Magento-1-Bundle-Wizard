@@ -1,0 +1,55 @@
+.product-options ul.options-list label img {
+    float: left;
+    margin: 0 15px;
+}
+
+.product-options ul li {
+    border-bottom: 1px solid #E4E4E4;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.product-options ul li:last-of-type {
+    border-bottom: none;
+}
+
+.product-options dd .qty-holder {
+    text-align: right;
+}
+
+.product-options dd .button.back {
+    float: left;
+}
+
+.product-options dt{
+    border: 1px solid #E4E4E4;
+    border-bottom: none;
+    padding: 5px;
+}
+
+.product-options dt.active{
+    border: 1px solid #DE5400;
+    background: none repeat scroll 0% 0% #F18200;
+    color: #FFF;
+}
+
+.product-options dt.active label{
+    color: #FFF;
+}
+
+.product-options dt.active.validation-failed label {
+    color: #000;
+}
+.product-options dt.validation-failed label.required em,
+.product-options dt.active.validation-failed label.required em {
+    color: #F00;
+}
+
+.product-options dt label.required em {
+    color: #FFF;
+    margin-left: 5px;
+}
+
+.product-options p.required {
+    top: -20px;
+}

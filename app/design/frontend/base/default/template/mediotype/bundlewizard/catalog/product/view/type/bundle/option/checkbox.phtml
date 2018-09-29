@@ -1,0 +1,112 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+?>
+
+<?php /** @var $this Mage_Bundle_Block_Catalog_Product_View_Type_Bundle_Option_Checkbox */ ?>
+<?php /** @var $_option Mediotype_BundleWizard_Model_Bundle_Option */ ?>
+<?php $_option = $this->getOption() ?>
+<?php $_selections = $_option->getSelections() ?>
+<?php if ($_option->hasConfig()): ?>
+<dt id="bundle_option_container[<?php echo $_option->getId() ?>][config]_title" class="option-title">
+    <label <?php if ($_option->getRequired()) echo 'class="required"' ?>>
+        <?php echo ($config_title = $_option->getData('config_title')) ? $config_description : $_option->getData('default_config_title'); ?>
+    <?php if ($_option->getRequired()) echo '<em>*</em>' ?>
+    </label>
+</dt>
+<dd id="bundle_option_container[<?php echo $_option->getId() ?>][config]"
+    class="option-content no-display" <?= ($_option->decoratedIsLast) ? "last" : null; ?>">
+    <div class="description">
+    <?php echo ($config_description = $_option->getData('config_description')) ? $config_description : $_option->getData('default_config_description'); ?>
+    </div>
+    <div>
+        <?php echo $_option->getConfigurableOptionHtml(); ?>
+    </div>
+    <span class="qty-holder">
+        <?php if ($_option->getId() > 1): ?>
+        <a href="#" class="button back"
+           onclick="bWizard.previousStep(this); return false;">
+            <span><span>Back</span></span></a>
+    <?php endif; ?>
+            <a href="#" class="button" onclick="bWizard.nextStep(this); return false;">
+                <span><span>Next</span></span></a>
+    </span>
+</dd>
+<?php endif; ?>
+<dt id="bundle_option_container[<?php echo $_option->getId() ?>]_title" class="option-title">
+    <label<?php if ($_option->getRequired()) echo ' class="required"' ?>><?php echo $this->escapeHtml($_option->getTitle()) ?><?php if ($_option->getRequired()) echo '<em>*</em>' ?></label>
+</dt>
+<dd id="bundle_option_container[<?php echo $_option->getId() ?>]"
+    class="option-content no-display" <?= ($_option->decoratedIsLast) ? "last" : null; ?>">
+<div class="description">
+    <?php echo ($description = $_option->getData('description')) ? $description : $_option->getData('default_description'); ?>
+</div>
+<div class="input-box">
+    <?php if (count($_selections) == 1 && $_option->getRequired()): ?>
+        <?php echo $this->getSelectionQtyTitlePrice($_selections[0]) ?>
+        <input type="hidden" name="bundle_option[<?php echo $_option->getId() ?>]"
+               value="<?php echo $_selections[0]->getSelectionId() ?>"/>
+    <?php else: ?>
+        <ul class="options-list">
+            <?php foreach ($_selections as $_selection): ?>
+                <li id="option-<?php echo $_selection->getData('configurable_value_id') ?>"><input onclick="bundle.changeSelection(this)"
+                           class="change-container-classname checkbox bundle-option-<?php echo $_option->getId() ?> <?php if ($_option->getRequired()) echo 'validate-one-required-by-name' ?>"
+                           id="bundle-option-<?php echo $_option->getId() ?>-<?php echo $_selection->getSelectionId() ?>"
+                           type="checkbox"
+                           name="bundle_option[<?php echo $_option->getId() ?>][]"<?php if ($this->_isSelected($_selection)) echo ' checked="checked"' ?><?php if (!$_selection->isSaleable()) echo ' disabled="disabled"' ?>
+                           value="<?php echo $_selection->getSelectionId() ?>"/>
+                <span class="label">
+                    <label
+                        for="bundle-option-<?php echo $_option->getId() ?>-<?php echo $_selection->getSelectionId() ?>">
+                        <img
+                            src="<?php echo $this->helper('catalog/image')->init($_selection, 'small_image')->resize(135); ?>"
+                            width="135" height="135"
+                            alt="<?php echo $this->stripTags($this->getImageLabel($_selection, 'small_image'), null, true) ?>"/>
+                        <b><?php echo $_selection->getName() ?></b><br/>
+                        <?php echo $_selection->getData('short_description'); ?>
+                        <?php echo $this->getPriceHtml($_selection) ?>
+                    </label>
+                </span>
+                    <?php if ($_option->getRequired()): ?>
+                        <?php echo $this->setValidationContainer('bundle-option-' . $_option->getId() . '-' . $_selection->getSelectionId(), 'bundle-option-' . $_option->getId() . '-container') ?>
+                    <?php endif; ?>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+        <div id="bundle-option-<?php echo $_option->getId() ?>-container"></div>
+    <?php endif; ?>
+</div>
+<span class="qty-holder">
+    <?php if ($_option->getId() > 1 or $_option->hasConfig()): ?>
+        <a href="#" class="button back" onclick="bWizard.previousStep(this);return false;">
+            <span><span>Back</span></span></a>
+    <?php endif; ?>
+    <?php if (!$_option->decoratedIsLast): ?>
+        <a href="#" class="button" onclick="bWizard.nextStep(this);return false;">
+            <span><span>Next</span></span></a>
+    <?php endif; ?>
+    </span>
+</dd>
